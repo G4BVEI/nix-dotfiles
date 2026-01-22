@@ -80,6 +80,7 @@
     brightnessctl
     gh
     nh
+    nixd
   ];
 
   nix.settings.experimental-features = ["nix-command""flakes"];
