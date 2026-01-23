@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  self,
+  nixpkgs,
+  config,
+  ...
+}:
 
 {
   home.username = "gabvei";
