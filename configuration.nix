@@ -54,7 +54,6 @@
     isNormalUser = true;
     description = "gabvei";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
   };
   services.pipewire = {
     enable = true;
@@ -81,9 +80,13 @@
     gh
     nh
     nixd
+    nil
   ];
-
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    nixd
+    nil
+  ];
   nix.settings.experimental-features = ["nix-command""flakes"];
   system.stateVersion = "25.11";
-
 }
