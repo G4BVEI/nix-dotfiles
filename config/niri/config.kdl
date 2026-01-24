@@ -7,7 +7,7 @@ window-rule {
     opacity 0.5
     match app-id="dev.zed.Zed"
     match app-id="kitty"
-    match app-id="dev.zed.Zed"
+    match app-id="com.mitchellh.ghostty"
 }
 window-rule {
     match is-focused=true
