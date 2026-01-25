@@ -2,6 +2,10 @@
   description = "NixOS from Scratch";
 
   inputs = {
+    gazelle = {
+      url = "github:Zeus-Deus/gazelle-tui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -15,10 +19,10 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       sysc-greet,
+      gazelle,
       ...
     }:
     {
@@ -32,8 +36,14 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.gabvei = ./home.nix;
               backupFileExtension = "backup";
+              extraSpecialArgs = {
+                inputs = { inherit gazelle; };
+                users.gabvei.imports = [
+                  ./home.nix
+                  gazelle.homeModules.gazelle
+                ];
+              };
             };
           }
         ];

@@ -1,11 +1,15 @@
 {
-  self,
-  nixpkgs,
+  pkgs,
   config,
+  inputs,
   ...
 }:
 
 {
+  home.packages = [
+    inputs.gazelle.packages.${pkgs.system}.default
+  ];
+  programs.gazelle.enable = true;
   home.username = "gabvei";
   home.homeDirectory = "/home/gabvei";
   home.stateVersion = "25.05";
