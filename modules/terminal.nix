@@ -8,5 +8,4 @@
     fastfetch
     mapscii
   ];
-
 }
