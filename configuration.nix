@@ -6,8 +6,10 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
+    ./modules/niri.nix
     ./hardware-configuration.nix
+    ./modules/gaming.nix
+    ./modules/terminal.nix
   ];
 
   #====================================================================
@@ -33,7 +35,6 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "br";
-    variant = "nodeadkeys";
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gabvei = {
@@ -46,51 +47,24 @@
   };
   nixpkgs.config.allowUnfree = true;
   # Configure console keymap
-  console.keyMap = "br-abnt2";
+  console.keyMap = "us";
   #setting up flakes and stuff
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
   system.stateVersion = "25.11";
-  # =====================================================================
-  # System generals
-  # =====================================================================
-  # Niri wm
-  programs.niri.enable = true;
-  # audio
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-  # Session manager
-  services.sysc-greet = {
-    enable = true;
-    compositor = "niri"; # or "hyprland" or "sway"
-  };
   # ======================================================
   # General programs/pkgs
   # ======================================================
   programs.firefox.enable = true;
   environment.systemPackages = with pkgs; [
-    git
     kitty
     zed-editor
-    fuzzel
-    nemo
-    wl-clipboard
-    cliphist
-    brightnessctl
-    gh
-    nh
     nixd
     nil
     ghostty
-    yazi
     mission-center
-    swaybg
   ];
 
   #Language server
