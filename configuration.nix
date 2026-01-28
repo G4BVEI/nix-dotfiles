@@ -65,8 +65,13 @@
     nil
     ghostty
     mission-center
+    upower
+    upower-notify
   ];
-
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    barlow
+  ];
   #Language server
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

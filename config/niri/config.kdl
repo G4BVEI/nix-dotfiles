@@ -1,6 +1,5 @@
 window-rule {
     opacity 0.7
-    match app-id="dev.zed.Zed"
     match app-id="kitty"
     match app-id="com.mitchellh.ghostty"
     match is-focused=false
@@ -14,17 +13,18 @@ window-rule {
     match app-id="dev.zed.Zed"
     default-column-width { proportion 0.85; }
 }
-//window-rule {
-//    match app-id="firefox"
-//    opacity 0.95
-//}
+window-rule {
+    match app-id="dev.zed.Zed"
+    match app-id="cs2"
+    opacity 1.0
+}
 // Intreeput device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
 input {
     keyboard {
         xkb {
-               layout "us"
+               layout "br"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
          }
 
@@ -73,8 +73,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse
-    //max-scroll-amount="80%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -118,7 +117,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 5
+    gaps 0
     //empty-workspace-above-first
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -158,7 +157,6 @@ layout {
     // client-side decorations.
     //
     // Alternatively, you can override it with a window rule called
-    // `draw-border-with-background`.
 
     // You can change how the focus ring looks.
     focus-ring {
@@ -202,8 +200,8 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
 
+        off
         width 4
         active-color "#ffc87f"
         inactive-color "#505050"
@@ -275,7 +273,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/gabvei/Downloads/wallhaven-gpj7mq.jpg"
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/gabvei/Downloads/wallhaven-47p683_1920x1200.png"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 //spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

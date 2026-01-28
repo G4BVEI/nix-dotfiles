@@ -2,6 +2,10 @@
   description = "NixOS from Scratch";
 
   inputs = {
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     gazelle = {
       url = "github:Zeus-Deus/gazelle-tui";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +26,6 @@
       nixpkgs,
       home-manager,
       sysc-greet,
-      gazelle,
       ...
     }:
     {
@@ -30,20 +33,16 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          home-manager.nixosModules.home-manager
           sysc-greet.nixosModules.default
+          home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              extraSpecialArgs = {
-                inputs = { inherit gazelle; };
-                users.gabvei.imports = [
-                  ./home.nix
-                  gazelle.homeModules.gazelle
-                ];
-              };
+              users.gabvei.imports = [
+                ./home.nix
+              ];
             };
           }
         ];

@@ -1,15 +1,9 @@
 {
-  pkgs,
   config,
-  inputs,
   ...
 }:
 
 {
-  home.packages = [
-    inputs.gazelle.packages.${pkgs.system}.default
-  ];
-  programs.gazelle.enable = true;
   home.username = "gabvei";
   home.homeDirectory = "/home/gabvei";
   home.stateVersion = "25.05";
@@ -22,6 +16,9 @@
     };
     "kitty/kitty.conf" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/kitty/kitty.conf";
+    };
+    "quickshell/shell.qml" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/quickshell/shell.qml";
     };
   };
   programs.bash = {

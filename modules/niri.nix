@@ -21,5 +21,6 @@
     brightnessctl
     swaybg
     xwayland-satellite
+    quickshell
   ];
 }
