@@ -1,6 +1,5 @@
 window-rule {
     opacity 0.7
-    match app-id="kitty"
     match app-id="com.mitchellh.ghostty"
     match is-focused=false
 }

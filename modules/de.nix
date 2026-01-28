@@ -14,13 +14,25 @@
     compositor = "niri"; # or "hyprland" or "sway"
   };
   environment.systemPackages = with pkgs; [
+    #de-interface
     fuzzel
+    quickshell
+    #apps
     nemo
+    mission-center
+    kitty
+    #functionality
     wl-clipboard
     cliphist
     brightnessctl
-    swaybg
     xwayland-satellite
-    quickshell
+    upower
+    upower-notify
+    #cosmetic
+    swaybg
+  ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    barlow
   ];
 }

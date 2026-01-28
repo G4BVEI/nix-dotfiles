@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -10,8 +10,10 @@
     ./hardware-configuration.nix
     ./modules/gaming.nix
     ./modules/terminal.nix
+    ./modules/lsp.nix
+    ./modules/quickshell.nix
+    ./modules/general.nix
   ];
-
   #====================================================================
   #DEFAULTS, DONT MESS
   #====================================================================
@@ -54,28 +56,4 @@
     "flakes"
   ];
   system.stateVersion = "25.11";
-  # ======================================================
-  # General programs/pkgs
-  # ======================================================
-  programs.firefox.enable = true;
-  environment.systemPackages = with pkgs; [
-    kitty
-    zed-editor
-    nixd
-    nil
-    ghostty
-    mission-center
-    upower
-    upower-notify
-  ];
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    barlow
-  ];
-  #Language server
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    nixd
-    nil
-  ];
 }
