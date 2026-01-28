@@ -18,7 +18,7 @@
     fuzzel
     quickshell
     #apps
-    nemo
+    nautilus
     mission-center
     kitty
     #functionality
