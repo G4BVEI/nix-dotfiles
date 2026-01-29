@@ -6,12 +6,11 @@
 
 {
   imports = [
-    ./modules/niri.nix
+    ./modules/de.nix
     ./hardware-configuration.nix
     ./modules/gaming.nix
     ./modules/terminal.nix
-    ./modules/lsp.nix
-    ./modules/quickshell.nix
+    ./modules/coding.nix
     ./modules/general.nix
   ];
   #====================================================================

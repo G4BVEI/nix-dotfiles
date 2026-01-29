@@ -370,7 +370,10 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "ghostty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-
+    Mod+Z {spawn "kitten" "quick-access-terminal";}
+    Mod+Alt+I {spawn-sh "systemctl suspend";}
+    Mod+Alt+O {spawn-sh "poweroff";}
+    Mod+Alt+P {spawn-sh "reboot";}
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
