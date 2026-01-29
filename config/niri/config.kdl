@@ -274,6 +274,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/gabvei/Downloads/wallhaven-47p683_1920x1200.png"
 spawn-at-startup "mako"
+spawn-at-startup "qs" "-c" "noctalia-shell"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 //spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 //spawn-sh-at-startup "swaybg -i /home/gabvei/Downloads/wallhaven-gpj7mq.jpg -m fit"

@@ -39,7 +39,9 @@
     "gazelle": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1767904093,
@@ -57,7 +59,9 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1768765491,
@@ -88,9 +92,31 @@
         "type": "indirect"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769650682,
+        "narHash": "sha256-Mt8xECOF2IGZlBuwpEb7rqQJSN/b9x8SyGOZe8w9avc=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "11bb2b68f1e998ec762cf3854caf9df18dfb7780",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
     "quickshell": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1768985439,
@@ -111,6 +137,7 @@
         "gazelle": "gazelle",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "noctalia": "noctalia",
         "quickshell": "quickshell",
         "sysc-greet": "sysc-greet"
       }
@@ -118,7 +145,9 @@
     "sysc-greet": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1768925218,

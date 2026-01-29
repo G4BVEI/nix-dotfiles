@@ -1,5 +1,7 @@
 {
   config,
+  inputs,
+  pkgs,
   ...
 }:
 
@@ -27,4 +29,7 @@
       btw = "sudo nixos-rebuild switch --flake ~/nix-dotfiles/";
     };
   };
+  home.packages = [
+    inputs.gazelle.packages.${pkgs.system}.default
+  ];
 }

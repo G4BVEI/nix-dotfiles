@@ -19,18 +19,25 @@
       url = "github:Nomadcxx/sysc-greet";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       home-manager,
       sysc-greet,
+      noctalia,
+      gazelle,
       ...
     }:
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
           sysc-greet.nixosModules.default
@@ -41,6 +48,7 @@
               useUserPackages = true;
               backupFileExtension = "backup";
               users.gabvei.imports = [
+                gazelle.homeModules.gazelle
                 ./home.nix
               ];
             };

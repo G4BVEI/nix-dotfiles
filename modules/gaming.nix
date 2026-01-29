@@ -10,9 +10,6 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
   };
   environment.systemPackages = with pkgs; [
     gamescope
