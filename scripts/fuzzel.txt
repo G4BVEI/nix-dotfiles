@@ -1,9 +1,0 @@
-ln -sf /home/gabvei/nix-dotfiles/themes/actual-theme/colors.ini /home/gabvei/nix-dotfiles/config/fuzzel/colors.ini
-ln -sf /home/gabvei/nix-dotfiles/themes/actual-theme/zed.json /home/gabvei/nix-dotfiles/config/zed/zed.json
-ln -sf /home/gabvei/nix-dotfiles/themes/actual-theme/colors.kdl /home/gabvei/nix-dotfiles/config/niri/colors.kdl
-ln -sf /home/gabvei/nix-dotfiles/themes/actual-theme/colors.conf /home/gabvei/nix-dotfiles/config/kitty/colors.conf
-
-ln -sfn /home/gabvei/.config/themes/${theme} home/gabvei/.config/themes/actual-theme
-ls /home/gabvei/nix-dotfiles/themes/actual-theme/wallpapers
-swaybg -m fill -i /home/gabvei/nix-dotfiles/themes/actual-theme/wallpapers
-ln -sf /home/gabvei/nix-dotfiles/themes/actual-theme/colors.ini /home/gabvei/nix-dotfiles/config/fuzzel/colors.ini

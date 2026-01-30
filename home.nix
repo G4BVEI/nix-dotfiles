@@ -19,9 +19,9 @@
     "kitty/kitty.conf" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/kitty/kitty.conf";
     };
-    "quickshell/shell.qml" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/quickshell/shell.qml";
-    };
+    #"quickshell/shell.qml" = {
+    #  source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/quickshell/shell.qml";
+    #};
   };
   programs.bash = {
     enable = true;

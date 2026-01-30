@@ -26,8 +26,6 @@
     cliphist
     brightnessctl
     xwayland-satellite
-    upower
-    upower-notify
     #cosmetic
     swaybg
   ];

@@ -47,6 +47,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
+              extraSpecialArgs = { inherit inputs; };
               users.gabvei.imports = [
                 gazelle.homeModules.gazelle
                 ./home.nix
