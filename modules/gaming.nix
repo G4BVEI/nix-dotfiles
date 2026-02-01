@@ -13,6 +13,7 @@
   };
   environment.systemPackages = with pkgs; [
     gamescope
+    lutris
   ];
-  #xwayland also makes part of this pack but it is more related to the wm itself so it is in de.nix
+  #xwayland-satellite also makes part of this pack but it is more related to niri itself so it is in de.nix
 }
