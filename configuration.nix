@@ -12,7 +12,6 @@
     ./modules/terminal.nix
     ./modules/coding.nix
     ./modules/general.nix
-    ./modules/banana.nix
   ];
   #====================================================================
   #DEFAULTS, DONT MESS

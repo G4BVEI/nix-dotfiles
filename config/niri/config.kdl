@@ -75,7 +75,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse max-scroll-amount="100%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -119,7 +119,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
 
-    gaps 30
+    gaps 0
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -310,7 +310,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 30
+    geometry-corner-radius 10
     clip-to-geometry true
 }
 
@@ -335,12 +335,9 @@ binds {
     Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle";}
     Mod+A { spawn "noctalia-shell" "ipc" "call" "settings" "toggle";}
     Mod+Alt+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Z {spawn "kitten" "quick-access-terminal";}
-    Mod+L {spawn "noctalia-shell" "ipc" "call" "sessionMenu" "Toggle";}
-    Mod+Alt+I {spawn-sh "systemctl suspend";}
-    Mod+Alt+O {spawn-sh "poweroff";}
-    Mod+Alt+P {spawn-sh "reboot";}
+    Mod+L {spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle";}
+    Mod+Alt+L {spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock";}
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
@@ -401,12 +398,10 @@ binds {
     Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Alt+Down     { focus-workspace-down; }
+    Mod+Alt+Up       { focus-workspace-up; }
+    Mod+Ctrl+Alt+Down{ move-column-to-workspace-down; }
+    Mod+Ctrl+Alt+Up   { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
