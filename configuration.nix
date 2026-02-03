@@ -18,6 +18,11 @@
   #====================================================================
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelModules = [ "asus_wmi" ];
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="power_supply", KERNEL=="BAT0", \
+      ATTR{charge_control_end_threshold}="85"
+  '';
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   time.timeZone = "America/Sao_Paulo";

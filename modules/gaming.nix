@@ -13,7 +13,11 @@
   };
   environment.systemPackages = with pkgs; [
     gamescope
-    lutris
+    (heroic.override {
+      extraPkgs = pkgs: [
+        pkgs.gamescope
+      ];
+    })
   ];
   #xwayland-satellite also makes part of this pack but it is more related to niri itself so it is in de.nix
 }
