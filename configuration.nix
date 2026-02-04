@@ -6,7 +6,6 @@
 
 {
   imports = [
-    ./modules/minecraft.nix
     ./modules/de.nix
     ./hardware-configuration.nix
     ./modules/gaming.nix
