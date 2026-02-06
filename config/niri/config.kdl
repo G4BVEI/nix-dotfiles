@@ -23,7 +23,7 @@ window-rule {
 }
 // Intreeput device configuration.
 // Find the full list of options on the wiki:
-// https://yalter.github.io/niri/Configuration:-Input
+// https://yalter.github.io/niri/Configuration:FInput
 input {
     keyboard {
         xkb {
@@ -237,6 +237,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/gabvei/Downloads/wallhaven-47p683_1920x1200.png"
 spawn-at-startup "mako"
+spawn-at-startup "udiskie" "--automount" "--no-notify"
 spawn-at-startup "noctalia-shell"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 //spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
