@@ -2,9 +2,6 @@
 {
   services.udisks2.enable = true;
   services.gvfs.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
-  # Configure the termfilechooser backend to use Yazi
-  xdg.portal.config.common."org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
   #window manager
   programs.niri.enable = true;
   # Session manager
@@ -45,6 +42,5 @@
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
-    barlow
   ];
 }

@@ -29,6 +29,7 @@
       btw = "sudo nixos-rebuild switch --flake ~/nix-dotfiles/";
     };
   };
+  programs.zen-browser.enable = true;
   home.packages = [
     inputs.gazelle.packages.${pkgs.system}.default
   ];

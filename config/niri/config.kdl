@@ -11,6 +11,7 @@ window-rule {
 window-rule {
     match app-id="firefox"
     match app-id="dev.zed.Zed"
+    match app-id="zen-beta"
     default-column-width { proportion 0.85; }
 }
 //  App ID: "rocketleague.exe"
@@ -120,7 +121,7 @@ input {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-
+    center-focused-column "on-overflow"
     gaps 0
     preset-column-widths {
         proportion 0.33333

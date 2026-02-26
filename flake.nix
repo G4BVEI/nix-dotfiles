@@ -2,6 +2,14 @@
   description = "NixOS from Scratch";
 
   inputs = {
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        # IMPORTANT: To ensure compatibility with the latest Firefox version, use nixpkgs-unstable.
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +40,7 @@
       sysc-greet,
       noctalia,
       gazelle,
+      zen-browser,
       ...
     }:
     {
@@ -50,6 +59,7 @@
               extraSpecialArgs = { inherit inputs; };
               users.gabvei.imports = [
                 gazelle.homeModules.gazelle
+                zen-browser.homeModules.beta
                 ./home.nix
               ];
             };
