@@ -30,6 +30,7 @@
     };
   };
   programs.zen-browser.enable = true;
+  programs.zen-browser.suppressXdgMigrationWarning = true;
   home.packages = [
     inputs.gazelle.packages.${pkgs.system}.default
   ];
