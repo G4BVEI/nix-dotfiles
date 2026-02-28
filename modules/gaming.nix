@@ -22,7 +22,7 @@
         pkgs.gamescope
       ];
     })
-    hydralauncher
+    #hydralauncher
   ];
   #xwayland-satellite also makes part of this pack but it is more related to niri itself so it is in de.nix
 }
