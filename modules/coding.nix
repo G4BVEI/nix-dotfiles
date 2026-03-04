@@ -7,14 +7,13 @@
     #lsp
     nixd
     nil
-    qt6.qtdeclarative
+    devenv
   ];
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     nixd
     nil
   ];
-
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true; # important for nix shells
 }
