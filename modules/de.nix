@@ -39,6 +39,7 @@
     fuzzel
     imv
     pinta
+    gpu-screen-recorder
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
