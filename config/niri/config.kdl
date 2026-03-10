@@ -18,6 +18,7 @@ window-rule {
 window-rule {
     match app-id="dev.zed.Zed"
     match app-id="cs2"
+    match app-id="PacketTracer"
     opacity 1.0
 }
 window-rule {
