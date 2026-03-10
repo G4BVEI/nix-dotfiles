@@ -2,12 +2,10 @@
 {
   #whilst this includes most of the dev experience, some functionality still is at terminal.nix
   environment.systemPackages = with pkgs; [
-    #ide
-    zed-editor
-    #lsp
     nixd
     nil
     devenv
+    cachix
     ciscoPacketTracer9
   ];
   programs.nix-ld.enable = true;
