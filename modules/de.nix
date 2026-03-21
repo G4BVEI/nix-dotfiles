@@ -23,7 +23,6 @@
     #automount
     udiskie
     #interface stuff
-    quickshell
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     #apps
     mission-center
@@ -38,6 +37,9 @@
     nautilus
     fuzzel
     imv
+    mpv
+    vlc
+    ffmpeg
     pinta
     gpu-screen-recorder
   ];

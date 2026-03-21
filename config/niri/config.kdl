@@ -14,6 +14,10 @@ window-rule {
     match app-id="zen-beta"
     default-column-width { proportion 0.85; }
 }
+window-rule {
+    match app-id="rocketleague.exe"
+    open-maximized true
+}
 //  App ID: "rocketleague.exe"
 window-rule {
     match app-id="dev.zed.Zed"
@@ -172,7 +176,7 @@ layout {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
 
-        on
+        off
         width 4
         // Gradients can use a few different interpolation color spaces.
         // For example, this is a pastel rainbow gradient via in="oklch longer hue".
@@ -240,7 +244,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/gabvei/Downloads/wallhaven-47p683_1920x1200.png"
 spawn-at-startup "mako"
-spawn-at-startup "udiskie" "--automount" "--no-notify"
+spawn-at-startup "udiskie" "--automount"
 spawn-at-startup "noctalia-shell"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 //spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -315,7 +319,6 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 10
     clip-to-geometry true
 }
 

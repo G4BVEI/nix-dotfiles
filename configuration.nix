@@ -49,6 +49,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
   };
   nix.settings = {
