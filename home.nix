@@ -27,10 +27,10 @@
     enable = true;
     shellAliases = {
       btw = "sudo nixos-rebuild switch --flake ~/nix-dotfiles/";
+      get-shell = "~/nix-dotfiles/scripts/select_shell.sh";
     };
   };
   programs.zen-browser.enable = true;
-  programs.zen-browser.suppressXdgMigrationWarning = true;
   home.packages = [
     inputs.gazelle.packages.${pkgs.system}.default
   ];
