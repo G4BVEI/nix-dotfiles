@@ -1,36 +1,23 @@
 window-rule {
-    opacity 0.7
-    match app-id="com.mitchellh.ghostty"
-    match is-focused=false
-}
-window-rule {
-    match is-focused=true
-    opacity 1.0
-    match is-floating=true
-}
-window-rule {
     match app-id="firefox"
     match app-id="dev.zed.Zed"
     match app-id="zen-beta"
     default-column-width { proportion 0.85; }
 }
 window-rule {
-    match app-id="rocketleague.exe"
-    open-maximized true
+    tiled-state true
+    match app-id="dev.zed.Zed"
 }
-//  App ID: "rocketleague.exe"
+window-rule {
+    match app-id="rocketleague.exe"
+    open-fullscreen true
+}
 window-rule {
     match app-id="dev.zed.Zed"
     match app-id="cs2"
     match app-id="PacketTracer"
     opacity 1.0
 }
-window-rule {
-    draw-border-with-background false
-}
-// Intreeput device configuration.
-// Find the full list of options on the wiki:
-// https://yalter.github.io/niri/Configuration:FInput
 input {
     keyboard {
         xkb {
@@ -79,7 +66,7 @@ input {
     }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
-    warp-mouse-to-focus
+    //warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
