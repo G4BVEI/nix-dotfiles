@@ -113,7 +113,6 @@ input {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    center-focused-column "on-overflow"
     gaps 0
     preset-column-widths {
         proportion 0.33333
