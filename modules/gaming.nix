@@ -11,6 +11,11 @@
       proton-ge-bin
     ];
   };
+  hardware.bluetooth.enable = true;
+  # Required for PS3/PS4 controllers over Bluetooth
+  hardware.bluetooth.package = pkgs.bluez;
+  # Recommended for controller support in Steam
+  hardware.steam-hardware.enable = true;
   environment.systemPackages = with pkgs; [
     #minecraft stuff
     temurin-jre-bin-21
