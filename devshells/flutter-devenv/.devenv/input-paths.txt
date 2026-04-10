@@ -1,7 +1,0 @@
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/.devenv/bootstrap/bootstrapLib.nix
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/.devenv/bootstrap/default.nix
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/.devenv/bootstrap/resolve-lock.nix
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/devenv.local.nix
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/devenv.lock
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/devenv.nix
-/home/gabvei/nix-dotfiles/devshells/flutter-devenv/.env
