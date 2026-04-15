@@ -1,20 +1,21 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+
 {
   services.ollama = {
     enable = true;
-    acceleration = "rocm"; # Use AMD ROCm backend
 
-    # FORCE GPU COMPATIBILITY FOR RX 7700S (gfx1102)
-    # This tells ROCm to pretend the card is a slightly older, well-supported version.
-    rocmOverrideGfx = "11.0.0";
+    # INSTEAD of 'acceleration = "rocm"', use the specific package:
+    package = pkgs.ollama-rocm; # For AMD GPU
 
-    # Optional: Pre-load a model so it starts faster
+    # Environment variables to force GPU compatibility for RX 7700S
+
+    # Optional: Pre-load a model
     loadModels = [ "qwen2.5-coder:7b" ];
   };
 
   # 4. System Packages
   environment.systemPackages = with pkgs; [
-    ollama-rocm # The ROCm-specific Ollama package
-    rocmPackages.rocminfo # Tool to verify your GPU is detected
+    ollama-rocm
+    rocmPackages.rocminfo
   ];
 }

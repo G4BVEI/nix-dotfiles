@@ -12,6 +12,7 @@
     ./modules/terminal.nix
     ./modules/coding.nix
     ./modules/general.nix
+    ./modules/ai.nix
   ];
   #====================================================================
   #DEFAULTS, DONT MESS
