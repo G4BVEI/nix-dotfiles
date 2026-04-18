@@ -1,3 +1,5 @@
+/home/gabvei/.config/nixpkgs/overlays
+/home/gabvei/.config/nixpkgs/overlays.nix
 /home/gabvei/nix-dotfiles/devshells/flutter-devenv/.devenv/bootstrap/bootstrapLib.nix
 /home/gabvei/nix-dotfiles/devshells/flutter-devenv/.devenv/bootstrap/default.nix
 /home/gabvei/nix-dotfiles/devshells/flutter-devenv/.devenv/bootstrap/resolve-lock.nix
