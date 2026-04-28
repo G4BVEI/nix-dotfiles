@@ -7,7 +7,6 @@
     nil
     devenv
     cachix
-    ciscoPacketTracer9
     docker-compose
   ];
   programs.nix-ld.enable = true;

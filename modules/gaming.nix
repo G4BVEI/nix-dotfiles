@@ -17,8 +17,6 @@
   # Recommended for controller support in Steam
   hardware.steam-hardware.enable = true;
   environment.systemPackages = with pkgs; [
-    #minecraft stuff
-    temurin-jre-bin-21
     #gta and so on
     gamescope
     #epic games stuff

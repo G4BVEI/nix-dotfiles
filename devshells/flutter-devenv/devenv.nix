@@ -11,10 +11,6 @@
     enable = true;
     flutter.enable = true;
   };
-  languages.java = {
-    enable = true;
-    jdk.package = pkgs.jdk17;
-  };
   packages = [
     pkgs.chromium
   ];
