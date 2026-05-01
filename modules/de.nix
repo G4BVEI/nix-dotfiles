@@ -31,8 +31,6 @@
     wl-clipboard
     cliphist
     brightnessctl
-    #compatibility layer
-    xwayland-satellite
     #interface fallback
     nautilus
     fuzzel
