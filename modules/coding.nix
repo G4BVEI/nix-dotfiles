@@ -5,8 +5,6 @@
   environment.systemPackages = with pkgs; [
     nixd
     nil
-    devenv
-    cachix
     docker-compose
     zed-editor
     supabase-cli

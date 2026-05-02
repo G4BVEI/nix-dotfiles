@@ -6,8 +6,8 @@
 
 {
   imports = [
-    ./modules/de.nix
     ./hardware-configuration.nix
+    ./modules/de.nix
     ./modules/gaming.nix
     ./modules/terminal.nix
     ./modules/coding.nix
