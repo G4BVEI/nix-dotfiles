@@ -40,6 +40,7 @@
     ffmpeg
     pinta
     gpu-screen-recorder
+    xwayland-satellite
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
