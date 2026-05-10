@@ -7,7 +7,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
     }:
     let
@@ -23,6 +22,9 @@
           rust-analyzer
           gcc
           rustfmt
+          openssl
+          pkg-config
+          openssl.dev
           clippy
         ];
       };
