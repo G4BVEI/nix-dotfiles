@@ -2,7 +2,7 @@
   description = "ESP32 dev shell";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     esp-dev.url = "github:mirrexagon/nixpkgs-esp-dev";
   };
 
