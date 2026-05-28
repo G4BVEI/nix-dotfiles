@@ -45,11 +45,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gabvei = {
     isNormalUser = true;
-    description = "gabvei";
     extraGroups = [
       "networkmanager"
       "wheel"
       "docker"
+      "dialout"
+      "tty"
     ];
   };
   nix.settings = {
@@ -61,9 +62,6 @@
     substituters = [
       "https://cache.nixos.org"
       "https://devenv.cachix.org"
-    ];
-    trusted-public-keys = [
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
   nixpkgs.config.allowUnfree = true;
