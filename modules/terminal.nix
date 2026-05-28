@@ -8,11 +8,13 @@
     fastfetch
     mapscii
     starship
-	(yazi.override {
-		_7zz = _7zz-rar;  # Support for RAR extraction
-	})
+    (yazi.override {
+      _7zz = _7zz-rar; # Support for RAR extraction
+    })
     # archives
     p7zip
+    zip
+    unzip
     # search / navigation
     fd
     ripgrep

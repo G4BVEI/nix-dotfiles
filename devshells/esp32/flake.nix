@@ -1,34 +1,23 @@
 {
   description = "ESP32 dev shell";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    esp-dev.url = "github:mirrexagon/nixpkgs-esp-dev";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      esp-dev,
-    }:
+    { self, nixpkgs }:
     let
       system = "x86_64-linux";
-
-      overlays = [
-        esp-dev.overlays.default
-      ];
-
-      pkgs = import nixpkgs {
-        inherit system overlays;
-      };
+      pkgs = import nixpkgs { inherit system; };
     in
     {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
-          esp-idf-full
+          esp-idf
+          esptool
+          openocd
           cmake
           ninja
+          python3
         ];
       };
     };
