@@ -24,8 +24,8 @@
     enable = true;
     shellAliases = {
       btw = "sudo nixos-rebuild switch --flake ~/nix-dotfiles/";
-      select-shell = "~/nix-dotfiles/scripts/select_shell.sh";
-      run-shell = "~/nix-dotfiles/scripts/use_shell.sh";
+      install_shell = "~/nix-dotfiles/scripts/install_shell.sh";
+      run-shell = "~/nix-dotfiles/scripts/run_shell.sh";
     };
   };
   programs.zen-browser.enable = true;
