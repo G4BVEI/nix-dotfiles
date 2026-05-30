@@ -1,9 +1,17 @@
+//wallpaper to overview
+layer-rule {
+  match namespace="^noctalia-wallpaper*"
+  place-within-backdrop true
+}
+
+
 window-rule {
     match app-id="firefox"
     match app-id="dev.zed.Zed"
     match app-id="zen-beta"
     default-column-width { proportion 0.85; }
 }
+
 window-rule {
     tiled-state true
     match app-id="dev.zed.Zed"
@@ -12,11 +20,17 @@ window-rule {
     }
 }
 
+blur {
+  passes 2        // more passes = stronger blur (default: 3)
+  offset 3.0      // sample distance per pass (default: 3.0)
+  noise 0.02     // grain overlay (default: 0.02)
+  saturation 1.0  // color saturation boost (default: 1.5)
+}
+
 layer-rule {
   match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
   background-effect {
     xray false
-    blur false
   }
 }
 
@@ -127,6 +141,7 @@ output "eDP-1" {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
+      background-color "transparent"
     gaps 0
     preset-column-widths {
         proportion 0.33333
@@ -278,7 +293,7 @@ animations {
     //off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    slowdown 1.5
+    slowdown 2
     }
 
 // Window rules let you adjust behavior for individual windows.
