@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    obsidian
-    logseq
+  environment.systemPackages = [
+    inputs.nixpkgs-old.legacyPackages.${pkgs.system}.obsidian
+    pkgs.logseq
   ];
 }
