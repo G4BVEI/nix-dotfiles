@@ -19,6 +19,10 @@
           inherit system;
           config.allowUnfree = true;
         };
+
+        # We add :CDCOnBoot=default to fix the serial output on /dev/ttyACM0
+        fqbn = "esp32:esp32:esp32";
+        port = "/dev/ttyACM0";
       in
       {
         devShells.default = pkgs.mkShell {
@@ -27,17 +31,26 @@
             python3
             python3Packages.pyserial
             esptool
-            # For Zed's language server
             clang-tools
+            arduino-language-server
           ];
 
           shellHook = ''
-            echo "--- ESP32 Arduino Dev Environment ---"
-            echo "Device: /dev/ttyACM0"
+            echo "--- ESP32 Arduino Aliases Loaded ---"
+            echo "Device: ${port} | FQBN: ${fqbn}"
+
+            # Aliases for a faster workflow
+            alias esp-build='arduino-cli compile --fqbn ${fqbn} .'
+            alias esp-up='arduino-cli upload -p ${port} --fqbn ${fqbn} .'
+            alias esp-go='esp-build && esp-up'
+
+            # Monitor with the correct baudrate and reset pins disabled
+            alias esp-mon='arduino-cli monitor -p ${port} --config baudrate=9600 --config dtr=off --config rts=off'
 
             # Initialize arduino-cli if needed
-            if [ ! -f ~/.arduino15/arduino-cli.yaml ]; then
-              arduino-cli config init
+            if [ ! -d ~/.arduino15/packages/esp32 ]; then
+              echo "Installing ESP32 core, this might take a minute..."
+              arduino-cli config init --overwrite
               arduino-cli core update-index
               arduino-cli core install esp32:esp32
             fi
