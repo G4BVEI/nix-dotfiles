@@ -1,7 +1,13 @@
-{ inputs, pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  oldPkgs = import inputs.nixpkgs-old {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+in
 {
   environment.systemPackages = [
-    inputs.nixpkgs-old.legacyPackages.${pkgs.system}.obsidian
+    oldPkgs.obsidian
     pkgs.logseq
   ];
 }
