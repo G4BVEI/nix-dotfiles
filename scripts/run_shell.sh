@@ -1,30 +1,37 @@
 #!/usr/bin/env bash
-
 set -e
 
 DEV_SHELLS_DIR="$HOME/nix-dotfiles/devshells"
 
-command -v fzf >/dev/null || { echo "fzf is not installed"; exit 1; }
-
-# List everything (dirs + files)
-entry=$(find "$DEV_SHELLS_DIR" -maxdepth 1 -mindepth 1 -printf "%f\n" | sort | \
-  fzf --prompt="Select devshell: ")
-
-[ -z "$entry" ] && { echo "No selection made"; exit 1; }
+# Check for command-line argument
+if [ -n "$1" ]; then
+    entry="$1"
+    # Verify the entry exists
+    if [ ! -d "$DEV_SHELLS_DIR/$entry" ] && [ ! -f "$DEV_SHELLS_DIR/$entry" ]; then
+        echo "Error: '$entry' not found in $DEV_SHELLS_DIR"
+        exit 1
+    fi
+else
+    # Interactive mode: require fzf
+    command -v fzf >/dev/null || { echo "fzf is not installed"; exit 1; }
+    entry=$(find "$DEV_SHELLS_DIR" -maxdepth 1 -mindepth 1 -printf "%f\n" | sort | \
+        fzf --prompt="Select devshell: ")
+    [ -z "$entry" ] && { echo "No selection made"; exit 1; }
+fi
 
 ENTRY_PATH="$DEV_SHELLS_DIR/$entry"
 
-# Enter shell immediately (temporary)
-if [ -d "$ENTRY_PATH" ] && [ -f "$ENTRY_PATH/.envrc" ]; then
-  # For direnv-based shells
-  echo "Entering shell with direnv environment..."
-  exec bash --rcfile <(echo "source \"$ENTRY_PATH/.envrc\"; exec bash")
-elif [ -f "$ENTRY_PATH/flake.nix" ]; then
-  # For flake-based shells
-  echo "Entering nix shell from flake: $entry"
-  cd "$ENTRY_PATH"
-  exec nix develop
+# 1. Check for directory-based flake
+if [ -d "$ENTRY_PATH" ] && [ -f "$ENTRY_PATH/flake.nix" ]; then
+    echo "Entering nix shell from flake: $entry"
+    exec nix develop "$ENTRY_PATH"
+
+# 2. Check for standalone flake file
+elif [ -f "$ENTRY_PATH" ] && [[ "$ENTRY_PATH" == *.nix ]]; then
+    echo "Entering nix shell from file: $entry"
+    exec nix develop -f "$ENTRY_PATH"
+
 else
-  echo "Invalid devshell (no .envrc or flake.nix)"
-  exit 1
+    echo "Invalid devshell (no flake.nix found in $entry)"
+    exit 1
 fi
