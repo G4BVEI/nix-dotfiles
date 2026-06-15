@@ -20,6 +20,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/kitty/kitty.conf";
     };
   };
+  programs.carapace = {
+    enable = true;
+    enableBashIntegration = true;
+  };
   programs.bash = {
     enable = true;
     shellAliases = {
