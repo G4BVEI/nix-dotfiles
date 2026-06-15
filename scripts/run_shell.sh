@@ -21,17 +21,22 @@ fi
 
 ENTRY_PATH="$DEV_SHELLS_DIR/$entry"
 
-# 1. Check for directory-based flake
-if [ -d "$ENTRY_PATH" ] && [ -f "$ENTRY_PATH/flake.nix" ]; then
+# 1. Check for devenv
+if [ -d "$ENTRY_PATH" ] && [ -f "$ENTRY_PATH/devenv.nix" ]; then
+    echo "Entering devenv shell: $entry"
+    exec devenv shell "$ENTRY_PATH"
+
+# 2. Check for directory-based flake
+elif [ -d "$ENTRY_PATH" ] && [ -f "$ENTRY_PATH/flake.nix" ]; then
     echo "Entering nix shell from flake: $entry"
     exec nix develop "$ENTRY_PATH"
 
-# 2. Check for standalone flake file
+# 3. Check for standalone flake file
 elif [ -f "$ENTRY_PATH" ] && [[ "$ENTRY_PATH" == *.nix ]]; then
     echo "Entering nix shell from file: $entry"
     exec nix develop -f "$ENTRY_PATH"
 
 else
-    echo "Invalid devshell (no flake.nix found in $entry)"
+    echo "Invalid devshell (no devenv.nix, flake.nix, or .nix file found)"
     exit 1
 fi
