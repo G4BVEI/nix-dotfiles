@@ -50,6 +50,7 @@
       "wheel"
       "docker"
       "dialout"
+      "plugdev"
       "tty"
     ];
   };

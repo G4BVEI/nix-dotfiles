@@ -8,6 +8,5 @@ in
 {
   environment.systemPackages = [
     oldPkgs.obsidian
-    pkgs.logseq
   ];
 }
