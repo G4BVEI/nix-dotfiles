@@ -24,6 +24,14 @@
           pkg-config
           libudev-zero
           libusb1
+          # Critical for bindgen and building esp-idf-sys
+          zlib
+          clang
+          libclang
+          stdenv.cc.cc.lib
+          cmake
+          ninja
+          python3
         ];
 
         # Development tools
@@ -34,6 +42,7 @@
           rust-analyzer
           esp-generate
           clang-analyzer
+          ldproxy
         ];
       in
       {
@@ -50,6 +59,24 @@
 
             shellHook = ''
               export RUSTUP_TOOLCHAIN=${esp-rs}
+
+              # Force bindgen to use Nix's libclang
+              export LIBCLANG_PATH="${pkgs.libclang.lib}/lib"
+              export CC="${pkgs.clang}/bin/clang"
+              export CXX="${pkgs.clang}/bin/clang++"
+              export LD_LIBRARY_PATH="${
+                pkgs.lib.makeLibraryPath [
+                  pkgs.zlib
+                  pkgs.stdenv.cc.cc
+                  pkgs.libclang.lib
+                ]
+              }:$LD_LIBRARY_PATH"
+
+              echo "=== ESP32 Rust Development Environment ==="
+              echo "Rust toolchain: $RUSTUP_TOOLCHAIN"
+              echo "LIBCLANG_PATH: $LIBCLANG_PATH"
+              echo "CC: $CC"
+              echo "=========================================="
             '';
           };
 
@@ -59,6 +86,16 @@
             buildInputs = commonBuildInputs ++ [ esp-rs ];
             shellHook = ''
               export RUSTUP_TOOLCHAIN=${esp-rs}
+              export LIBCLANG_PATH="${pkgs.libclang.lib}/lib"
+              export CC="${pkgs.clang}/bin/clang"
+              export CXX="${pkgs.clang}/bin/clang++"
+              export LD_LIBRARY_PATH="${
+                pkgs.lib.makeLibraryPath [
+                  pkgs.zlib
+                  pkgs.stdenv.cc.cc
+                  pkgs.libclang.lib
+                ]
+              }:$LD_LIBRARY_PATH"
             '';
           };
 
@@ -72,10 +109,14 @@
             shellHook = ''
               export RUSTUP_TOOLCHAIN=${esp-rs}
               export CI=1
+              export LIBCLANG_PATH="${pkgs.libclang.lib}/lib"
+              export CC="${pkgs.clang}/bin/clang"
+              export CXX="${pkgs.clang}/bin/clang++"
               export LD_LIBRARY_PATH="${
                 pkgs.lib.makeLibraryPath [
                   pkgs.zlib
                   pkgs.stdenv.cc.cc
+                  pkgs.libclang.lib
                 ]
               }:$LD_LIBRARY_PATH"
             '';

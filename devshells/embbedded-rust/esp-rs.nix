@@ -2,15 +2,16 @@
   pkgs ? import <nixpkgs> { },
   lib ? pkgs.lib,
 }:
+
 let
   versions = {
     esp-rust = {
-      version = "1.92.0.0"; # or "1.91.0.0" for smoltcp support
-      hash = "sha256-6enJJdfzU4OmXMdyu8jtrchmO0+8tZFmfn9P3GYsnIY="; # Will need to update
+      version = "1.92.0.0";
+      hash = "sha256-6enJJdfzU4OmXMdyu8jtrchmO0+8tZFmfn9P3GYsnIY=";
     };
     rust-src = {
-      version = "1.92.0.0"; # Must match esp-rust version
-      hash = "sha256-nMTDpzKnjanFe8ttqPBYbIOcC3/f8HD7FgyzT4yO4M4="; # Will need to update
+      version = "1.92.0.0";
+      hash = "sha256-nMTDpzKnjanFe8ttqPBYbIOcC3/f8HD7FgyzT4yO4M4=";
     };
     gcc = {
       version = "14.2.0_20241119";
@@ -74,19 +75,46 @@ let
       runHook preInstall
       mkdir -p $out
       ./install.sh --destdir=$out --prefix="" --disable-ldconfig --without=rust-docs-json-preview,rust-docs
+
+      # Create target spec files directory
+      mkdir -p $out/lib/rustlib
+
+      # Download and install target specs for ESP32
+      TARGETS="xtensa-esp32-espidf xtensa-esp32s2-espidf xtensa-esp32s3-espidf riscv32imc-esp-espidf"
+      for target in $TARGETS; do
+        TARGET_FILE="$out/lib/rustlib/$target/lib"
+        mkdir -p $TARGET_FILE
+      done
+
       runHook postInstall
     '';
-
-    meta = with lib; {
-      description = "ESP32 Rust toolchain";
-      homepage = "https://github.com/esp-rs/rust-build";
-      license = with licenses; [
-        mit
-        asl20
-      ];
-      platforms = [ "x86_64-linux" ];
-    };
   };
+
+  # Create wrapper script that sets all necessary environment variables
+  esp-env-wrapper = pkgs.writeShellScriptBin "esp-env" ''
+    export ESP_GCC_TOOLCHAIN="${esp-xtensa-gcc}/bin"
+    export RISC_V_GCC_TOOLCHAIN="${esp-riscv32-gcc}/bin"
+    export RUST_SRC_PATH="${rust-src}/lib/rustlib/src/rust/library"
+
+    # Add all toolchains to PATH
+    export PATH="${esp-rust-build}/bin:${esp-xtensa-gcc}/bin:${esp-riscv32-gcc}/bin:$PATH"
+
+    # Set cargo config
+    mkdir -p .cargo
+    cat > .cargo/config.toml << 'EOF'
+    [build]
+    target = "xtensa-esp32-espidf"
+
+    [target.'cfg(target_os = "espidf")']
+    linker = "ldproxy"
+    runner = "espflash flash --monitor"
+
+    [unstable]
+    build-std = ["std", "panic_abort"]
+    EOF
+
+    exec "$@"
+  '';
 
   esp-xtensa-gcc = mkGccToolchain {
     name = "xtensa";
@@ -104,75 +132,43 @@ let
     url = "https://github.com/esp-rs/rust-build/releases/download/v${versions.rust-src.version}/rust-src-${versions.rust-src.version}.tar.xz";
     hash = versions.rust-src.hash;
   };
-
-  esp-rs-base = pkgs.symlinkJoin {
-    name = "esp-rs-base-${versions.esp-rust.version}";
-    paths = [
-      esp-rust-build
-      esp-xtensa-gcc
-      esp-riscv32-gcc
-    ];
-    meta = {
-      description = "Base ESP32 toolchain components";
-      platforms = [ "x86_64-linux" ];
-    };
-  };
 in
-pkgs.stdenv.mkDerivation {
-  pname = "esp-rs";
+pkgs.symlinkJoin {
+  name = "esp-rs";
   version = versions.esp-rust.version;
 
-  src = rust-src;
-
-  nativeBuildInputs = with pkgs; [
-    autoPatchelfHook
-    pkg-config
+  paths = [
+    esp-rust-build
+    esp-xtensa-gcc
+    esp-riscv32-gcc
+    esp-env-wrapper
   ];
 
-  buildInputs = with pkgs; [
-    stdenv.cc.cc
-    zlib
-  ];
+  postBuild = ''
+    # Symlink rust-src to the expected location
+    mkdir -p $out/lib/rustlib/src
+    ln -sf ${rust-src}/lib/rustlib/src/rust $out/lib/rustlib/src/rust
 
-  autoPatchelfIgnoreMissingDeps = [ "*" ];
+    # Create rustc wrapper that forces the target
+    cat > $out/bin/rustc-wrapper << EOF
+    #!/bin/bash
+    export RUST_SRC_PATH="${rust-src}/lib/rustlib/src/rust/library"
+    exec ${esp-rust-build}/bin/rustc "\$@"
+    EOF
+    chmod +x $out/bin/rustc-wrapper
 
-  patchPhase = ''
-    patchShebangs ./install.sh
+    # Also wrap cargo
+    cat > $out/bin/cargo-wrapper << EOF
+    #!/bin/bash
+    export RUST_SRC_PATH="${rust-src}/lib/rustlib/src/rust/library"
+    export PATH="${esp-rust-build}/bin:\$PATH"
+    exec ${pkgs.cargo}/bin/cargo "\$@"
+    EOF
+    chmod +x $out/bin/cargo-wrapper
   '';
-
-  installPhase = ''
-    runHook preInstall
-
-    # Start with the base toolchain
-    mkdir -p $out
-    cp -rL ${esp-rs-base}/* $out/
-    chmod -R u+w $out
-
-    # Install rust-src on top
-    ./install.sh --destdir=$out --prefix="" --disable-ldconfig
-
-    runHook postInstall
-  '';
-
-  passthru = {
-    inherit esp-rust-build esp-xtensa-gcc esp-riscv32-gcc;
-    version = versions.esp-rust.version;
-  };
 
   meta = with lib; {
-    description = "Complete ESP32 Rust development toolchain";
-    longDescription = ''
-      A complete toolchain for developing Rust applications on ESP32 microcontrollers.
-      Includes Rust compiler with ESP32 targets, Xtensa and RISC-V GCC toolchains,
-      and all necessary components for no_std ESP-HAL development.
-    '';
-    homepage = "https://github.com/esp-rs";
-    license = with licenses; [
-      mit
-      asl20
-      gpl2Plus
-    ];
+    description = "Complete ESP32 Rust development toolchain (no rustup)";
     platforms = [ "x86_64-linux" ];
-    maintainers = [ ];
   };
 }
