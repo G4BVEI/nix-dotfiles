@@ -20,18 +20,6 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/gabvei/nix-dotfiles/config/kitty/kitty.conf";
     };
   };
-  programs.carapace = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      btw = "sudo nixos-rebuild switch --flake ~/nix-dotfiles/";
-      install_shell = "~/nix-dotfiles/scripts/install_shell.sh";
-      run-shell = "~/nix-dotfiles/scripts/run_shell.sh";
-    };
-  };
   programs.zen-browser.enable = true;
   home.packages = [
     inputs.gazelle.packages.${pkgs.system}.default
