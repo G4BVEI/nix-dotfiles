@@ -27,6 +27,7 @@
           pkg-config
           openssl.dev
           clippy
+          cargo-generate
         ];
       };
     };
