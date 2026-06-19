@@ -13,6 +13,12 @@
   android = {
     enable = true;
     flutter.enable = true;
+    platforms.version = [
+      "32"
+      "34"
+      "35"
+      "36"
+    ];
   };
   enterShell = ''
     export CHROME_EXECUTABLE=${pkgs.chromium}/bin/chromium
