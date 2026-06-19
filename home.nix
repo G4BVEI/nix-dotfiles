@@ -24,13 +24,4 @@
   home.packages = [
     inputs.gazelle.packages.${pkgs.system}.default
   ];
-  programs.librewolf = {
-    enable = true;
-    # Enable WebGL, cookies and history
-    settings = {
-      "webgl.disabled" = false;
-      "privacy.clearOnShutdown.history" = false;
-      "network.cookie.lifetimePolicy" = 0;
-    };
-  };
 }
